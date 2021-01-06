@@ -7,7 +7,46 @@
 <body>
   <script>
 
+    function computerPlay() {
+        switch(Math.floor((Math.random() * 3) +1)) {
+            case 1:
+                return "Rock";
+            case 2:
+                return "Paper";
+            case 3:
+                return "Scissors";
+        }
+    }
 
+    function round(playerSelection, computerSelection) {
+        computerSelection = computerPlay();
+        playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
+
+        if (computerSelection === playerSelection) {
+            return `It was a tie!`
+        }
+
+        switch(playerSelection) {
+            case "Rock":
+                if (computerSelection === "Scissors") {
+                    return `You win! ${playerSelection} beats ${computerSelection}`
+                } else {
+                    return `You lose! ${computerSelection} beats ${playerSelection}`
+                }
+            case "Paper":
+                if (computerSelection === "Rock") {
+                    return `You win! ${playerSelection} beats ${computerSelection}`
+                } else {
+                    return `You lose! ${computerSelection} beats ${playerSelection}`
+                }
+            case "Scissors":
+                if (computerSelection === "Paper") {
+                    return `You win! ${playerSelection} beats ${computerSelection}`
+                } else {
+                    return `You lose! ${computerSelection} beats ${playerSelection}`
+                }               
+        }
+    }
 
   </script>
 </body>
