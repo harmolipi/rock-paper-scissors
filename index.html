@@ -3,8 +3,27 @@
 <head>
   <title>Rock Paper Scissors</title>
   <meta charset="UTF-8"/>
+  <link rel="stylesheet" type="text/css" href="./style.css" />
 </head>
 <body>
+    <h1>Let's play Rock Paper Scissors!</h1>
+
+    <div id="options">
+        <button class="option" id="rock">Rock</button>
+        <button class="option" id="paper">Paper</button>
+        <button class="option" id="scissors">Scissors</button>
+    </div>
+
+    <div id="results">
+        <p>Round:</p><span id="roundNumber"></span>
+        <div id="points">
+            <p>Player:</p><span id="playerPoints"></span>
+            <p>Computer:</p><span id="computerPoints"></span>
+        </div>
+        <p id="message"></p>
+        <p id="winner"></p>
+    </div>
+
   <script>
 
     function computerPlay() {
