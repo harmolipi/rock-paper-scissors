@@ -58,90 +58,24 @@
         let result;
         let winner;
         
-        //Round 1
-        playerSelection = window.prompt(`Round ${roundNumber}: Rock, Paper, or Scissors?`, `Rock`);
-        computerSelection = computerPlay();
-        result = playRound(playerSelection, computerSelection);
-        console.log(`Round ${roundNumber}:`);
-        console.log(result);
-        window.alert(result);
-        if (result.includes(`win`)) {
-            playerWins++;
-        } else if (result.includes(`lose`)) {
-            computerWins++;
-        } else if (result.includes(`tie`)) {
-        } else {
-            computerWins++; //invalid entry
+        //Rounds loop
+        for (roundNumber; roundNumber <= 5; roundNumber++) {
+            playerSelection = window.prompt(`Round ${roundNumber}: Rock, Paper, or Scissors?`, `Rock`);
+            computerSelection = computerPlay();
+            result = playRound(playerSelection, computerSelection);
+            console.log(`Round ${roundNumber}:`);
+            console.log(result);
+            window.alert(result);
+            if (result.includes(`win`)) {
+                playerWins++;
+            } else if (result.includes(`lose`)) {
+                computerWins++;
+            } else if (result.includes(`tie`)) {
+            } else {
+                computerWins++; //invalid entry
+            } 
         }
-        roundNumber++; 
-
-        //Round 2
-        playerSelection = window.prompt(`Round ${roundNumber}: Rock, Paper, or Scissors?`, `Rock`);
-        computerSelection = computerPlay();
-        result = playRound(playerSelection, computerSelection);
-        console.log(`Round ${roundNumber}:`);
-        console.log(result);
-        window.alert(result);
-        if (result.includes(`win`)) {
-            playerWins++;
-        } else if (result.includes(`lose`)) {
-            computerWins++;
-        } else if (result.includes(`tie`)) {
-        } else {
-            computerWins++; //invalid entry
-        }
-        roundNumber++;     
-
-        //Round 3
-        playerSelection = window.prompt(`Round ${roundNumber}: Rock, Paper, or Scissors?`, `Rock`);
-        computerSelection = computerPlay();
-        result = playRound(playerSelection, computerSelection);
-        console.log(`Round ${roundNumber}:`);
-        console.log(result);
-        window.alert(result);
-        if (result.includes(`win`)) {
-            playerWins++;
-        } else if (result.includes(`lose`)) {
-            computerWins++;
-        } else if (result.includes(`tie`)) {
-        } else {
-            computerWins++; //invalid entry
-        }
-        roundNumber++;  
-
-        //Round 4
-        playerSelection = window.prompt(`Round ${roundNumber}: Rock, Paper, or Scissors?`, `Rock`);
-        computerSelection = computerPlay();
-        result = playRound(playerSelection, computerSelection);
-        console.log(`Round ${roundNumber}:`);
-        console.log(result);
-        window.alert(result);
-        if (result.includes(`win`)) {
-            playerWins++;
-        } else if (result.includes(`lose`)) {
-            computerWins++;
-        } else if (result.includes(`tie`)) {
-        } else {
-            computerWins++; //invalid entry
-        }
-        roundNumber++; 
-
-        //Round 5
-        playerSelection = window.prompt(`Round ${roundNumber}: Rock, Paper, or Scissors?`, `Rock`);
-        computerSelection = computerPlay();
-        result = playRound(playerSelection, computerSelection);
-        console.log(`Round ${roundNumber}:`);
-        console.log(result);
-        window.alert(result);
-        if (result.includes(`win`)) {
-            playerWins++;
-        } else if (result.includes(`lose`)) {
-            computerWins++;
-        } else if (result.includes(`tie`)) {
-        } else {
-            computerWins++; //invalid entry
-        }
-        roundNumber++;  
+        
 
         //Declaring the winner
 
