@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Rock Paper Scissors</title>
-  <meta charset="UTF-8"/>
-  <link rel="stylesheet" type="text/css" href="./style.css" />
+    <title>Rock Paper Scissors</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
 </head>
+
 <body>
     <h1>Let's play Rock Paper Scissors!</h1>
 
@@ -15,104 +17,123 @@
     </div>
 
     <div id="results">
-        <p>Round:</p><span id="roundNumber"></span>
+        <p>Round:</p>
+        <p id="roundNumber"></p>
         <div id="points">
-            <p>Player:</p><span id="playerPoints"></span>
-            <p>Computer:</p><span id="computerPoints"></span>
+            <p>Player:</p>
+            <p id="playerPoints"></p>
+            <p>Computer:</p>
+            <p id="computerPoints"></p>
         </div>
-        <p id="message"></p>
+        <p id="message">Click a button above to play!</p>
         <p id="winner"></p>
+        <button id="resetButton">Reset</button>
     </div>
 
-  <script>
+    <script>
 
-    function computerPlay() {
-        switch(Math.floor((Math.random() * 3) +1)) {
-            case 1:
-                return "Rock";
-            case 2:
-                return "Paper";
-            case 3:
-                return "Scissors";
-        }
-    }
+        //initializations
+        const currentRound = document.querySelector('#roundNumber');
+        const playerPoints = document.querySelector('#playerPoints');
+        const computerPoints = document.querySelector('#computerPoints');
+        const message = document.querySelector('#message');
+        const winner = document.querySelector('#winner');
+        const buttons = document.querySelectorAll('#options > button');
+        const resetButton = document.querySelector('#resetButton');
 
-    function playRound(playerSelection, computerSelection) {
-        computerSelection = computerPlay();
-        playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
-
-        if (computerSelection === playerSelection) {
-            return `It was a tie!`
-        }
-
-        switch(playerSelection) {
-            case "Rock":
-                if (computerSelection === "Scissors") {
-                    return `You win! ${playerSelection} beats ${computerSelection}`
-                } else {
-                    return `You lose! ${computerSelection} beats ${playerSelection}`
-                }
-            case "Paper":
-                if (computerSelection === "Rock") {
-                    return `You win! ${playerSelection} beats ${computerSelection}`
-                } else {
-                    return `You lose! ${computerSelection} beats ${playerSelection}`
-                }
-            case "Scissors":
-                if (computerSelection === "Paper") {
-                    return `You win! ${playerSelection} beats ${computerSelection}`
-                } else {
-                    return `You lose! ${computerSelection} beats ${playerSelection}`
-                }
-            default:
-                return `That was an invalid entry! Point goes to the computer.`;
-        }
-    }
-
-    function game() {
-        //initializing variables
-        let roundNumber = 1;
+        let roundCounter = 0;
         let playerWins = 0;
         let computerWins = 0;
-        let result;
-        let winner;
-        
-        //Rounds loop
-        for (roundNumber; roundNumber <= 5; roundNumber++) {
-            playerSelection = window.prompt(`Round ${roundNumber}: Rock, Paper, or Scissors?`, `Rock`);
+
+        currentRound.textContent = roundCounter;
+        playerPoints.textContent = playerWins;
+        computerPoints.textContent = computerWins;
+
+        function computerPlay() {
+            switch (Math.floor((Math.random() * 3) + 1)) {
+                case 1:
+                    return "Rock";
+                case 2:
+                    return "Paper";
+                case 3:
+                    return "Scissors";
+            }
+        }
+
+        function playRound(playerSelection) {
             computerSelection = computerPlay();
-            result = playRound(playerSelection, computerSelection);
-            console.log(`Round ${roundNumber}:`);
-            console.log(result);
-            window.alert(result);
-            if (result.includes(`win`)) {
-                playerWins++;
-            } else if (result.includes(`lose`)) {
-                computerWins++;
-            } else if (result.includes(`tie`)) {
-            } else {
-                computerWins++; //invalid entry
-            } 
+            playerSelection = playerSelection.toString();
+            playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
+
+            if (computerSelection === playerSelection) {
+                return `It was a tie!`
+            }
+
+            switch (playerSelection) {
+                case "Rock":
+                    if (computerSelection === "Scissors") {
+                        playerWins++;
+                        return `You win! ${playerSelection} beats ${computerSelection}`
+                    } else {
+                        computerWins++;
+                        return `You lose! ${computerSelection} beats ${playerSelection}`
+                    }
+                case "Paper":
+                    if (computerSelection === "Rock") {
+                        playerWins++;
+                        return `You win! ${playerSelection} beats ${computerSelection}`
+                    } else {
+                        computerWins++;
+                        return `You lose! ${computerSelection} beats ${playerSelection}`
+                    }
+                case "Scissors":
+                    if (computerSelection === "Paper") {
+                        playerWins++;
+                        return `You win! ${playerSelection} beats ${computerSelection}`
+                    } else {
+                        computerWins++;
+                        return `You lose! ${computerSelection} beats ${playerSelection}`
+                    }
+                default:
+                    return `That was an invalid entry! Point goes to the computer.`;
+            }
         }
-        
 
-        //Declaring the winner
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                roundCounter++;
 
-        if (playerWins === computerWins) {
-            winner = `tie`;
-            console.log(`Result: tie.`);
-            window.alert(`Wow! It was a tie!`);
-        } else if (playerWins > computerWins) {
-            winner = `player`;
-            console.log(`Result: ${winner} wins.`);
-            window.alert(`Congratulations! You won: ${playerWins} to ${computerWins}!`);
-        } else {
-            winner = `computer`;
-            console.log(`Result: ${winner} wins.`);
-            window.alert(`So sorry, you lost: ${playerWins} to ${computerWins}. Better luck next time!`);
-        }
-    }
+                if (roundCounter <= 5) {
+                    message.textContent = playRound(button.id);
+                    currentRound.textContent = roundCounter;
+                    playerPoints.textContent = playerWins;
+                    computerPoints.textContent = computerWins;
 
-  </script>
+                    if (roundCounter === 5) {
+                        if (playerWins === computerWins) {
+                            winner.textContent = `Wow! It was a tie!`;
+                        } else if (playerWins > computerWins) {
+                            winner.textContent = `Congratulations! You won: ${playerWins} to ${computerWins}!`;
+                        } else {
+                            winner.textContent = `So sorry, you lost: ${playerWins} to ${computerWins}. Better luck next time!`;
+                        }
+                    }
+                }
+            });
+        });
+
+        resetButton.addEventListener('click', () => {
+            roundCounter = 0;
+            playerWins = 0;
+            computerWins = 0;
+            currentRound.textContent = roundCounter;
+            playerPoints.textContent = playerWins;
+            computerPoints.textContent = computerWins;
+            message.textContent = 'Click a button above to play!';
+            winner.textContent = '';
+        })
+
+    </script>
 </body>
+
 </html>
